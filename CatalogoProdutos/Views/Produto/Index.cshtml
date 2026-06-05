@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "Catálogo de Produtos";
+    
+    
+    var nomes = ViewBag.NomesProdutos as List<string>;
+    var precos = ViewBag.PrecosProdutos as List<double>;
+}
+
+<div class="container mt-4">
+    <h2>Catálogo de Produtos</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Preço</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < nomes.Count; i++)
+            {
+                
+                string estiloLinha = precos[i] < 100.00 ? "background-color: #d4edda; color: #155724;" : "";
+
+                <tr style="@estiloLinha">
+                    <td>@(i + 1)</td>
+                    <td>@nomes[i]</td>
+                    <td>@precos[i].ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="alert alert-info mt-3">
+        <strong>Total: @nomes.Count produtos</strong>
+    </div>
+</div>
